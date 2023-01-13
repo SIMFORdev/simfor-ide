@@ -1,5 +1,41 @@
 <RCC>
     <qresource prefix="/qml">
         <file>ui/MainWindow.qml</file>
+        <file>ui/UiKit/Buttons/DefaultButton.qml</file>
+        <file>ui/UiKit/colors.js</file>
+    </qresource>
+    <qresource prefix="/fonts">
+        <file>ui/fonts/JetBrainsMonoNL-Thin.ttf</file>
+        <file>ui/fonts/JetBrainsMono-SemiBold.ttf</file>
+        <file>ui/fonts/JetBrainsMono-ExtraBold.ttf</file>
+        <file>ui/fonts/JetBrainsMonoNL-Light.ttf</file>
+        <file>ui/fonts/JetBrainsMono-Italic.ttf</file>
+        <file>ui/fonts/JetBrainsMonoNL-SemiBoldItalic.ttf</file>
+        <file>ui/fonts/JetBrainsMonoNL-Bold.ttf</file>
+        <file>ui/fonts/JetBrainsMonoNL-ExtraLightItalic.ttf</file>
+        <file>ui/fonts/JetBrainsMono-LightItalic.ttf</file>
+        <file>ui/fonts/JetBrainsMono-Medium.ttf</file>
+        <file>ui/fonts/JetBrainsMono-BoldItalic.ttf</file>
+        <file>ui/fonts/JetBrainsMonoNL-SemiBold.ttf</file>
+        <file>ui/fonts/JetBrainsMono-ThinItalic.ttf</file>
+        <file>ui/fonts/JetBrainsMono-Light.ttf</file>
+        <file>ui/fonts/JetBrainsMonoNL-ExtraLight.ttf</file>
+        <file>ui/fonts/JetBrainsMonoNL-Medium.ttf</file>
+        <file>ui/fonts/JetBrainsMono-Bold.ttf</file>
+        <file>ui/fonts/JetBrainsMonoNL-MediumItalic.ttf</file>
+        <file>ui/fonts/JetBrainsMono-Regular.ttf</file>
+        <file>ui/fonts/JetBrainsMonoNL-LightItalic.ttf</file>
+        <file>ui/fonts/JetBrainsMonoNL-BoldItalic.ttf</file>
+        <file>ui/fonts/JetBrainsMonoNL-ExtraBoldItalic.ttf</file>
+        <file>ui/fonts/JetBrainsMonoNL-ExtraBold.ttf</file>
+        <file>ui/fonts/JetBrainsMono-Thin.ttf</file>
+        <file>ui/fonts/JetBrainsMonoNL-ThinItalic.ttf</file>
+        <file>ui/fonts/JetBrainsMonoNL-Regular.ttf</file>
+        <file>ui/fonts/JetBrainsMono-ExtraBoldItalic.ttf</file>
+        <file>ui/fonts/JetBrainsMono-SemiBoldItalic.ttf</file>
+        <file>ui/fonts/JetBrainsMono-ExtraLightItalic.ttf</file>
+        <file>ui/fonts/JetBrainsMono-ExtraLight.ttf</file>
+        <file>ui/fonts/JetBrainsMonoNL-Italic.ttf</file>
+        <file>ui/fonts/JetBrainsMono-MediumItalic.ttf</file>
     </qresource>
 </RCC>
