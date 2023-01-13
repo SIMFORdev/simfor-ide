@@ -1,8 +1,9 @@
 import QtQuick 2.9
 import QtQuick.Window 2.0
 import QtQuick.Controls 2.12
-import QtQuick.Layouts 1.0
+import QtQuick.Layouts 1.3
 import QtQuick.Dialogs 1.2
+import QtQml.Models 2.2
 
 import "UiKit/Buttons"
 
@@ -15,34 +16,95 @@ ApplicationWindow {
     visibility: showMaximized();
 
     Rectangle {
+        id: commandPanelRect
+        anchors.top: menuBar.bottom
+        width: parent.width
+        height: 30
+
+        color: "red"
+    }
+
+    Rectangle {
+        id: filesRect
+
+        anchors.top: commandPanelRect.bottom
+        height: parent.height
+        width: 300
+
+        color: "blue"
+
+        ListView {
+
+            id: listview
+
+            anchors.top: parent.top;
+            anchors.bottom: parent.bottom;
+            anchors.left: parent.left;
+            anchors.right: parent.right;
+
+            delegate: Item {
+                id: item
+                anchors.left: parent.left;
+                anchors.right: parent.right;
+                height: 40
+                Text {
+                    id: text
+                    text: sometext
+                }
+            }
+
+            model: ListModel {
+                id: listmodel
+            }
+        }
+    }
+
+    property int iter: 0
+
+    Rectangle {
+        id: workspaceRect
+
+        anchors.top: commandPanelRect.bottom
+        anchors.left: filesRect.right
+        height: parent.height
+        width: parent.width
+
+        color: "yellow"
+    }
+
+    Rectangle {
         id: rect
         x: 50
         y: 50
         DefaultButton {
             id: but
             name: "temp"
+            onClicked: function() {
+                listmodel.append({sometext: iter + " wow"})
+                iter += 1
+            }
         }
     }
 
-//    menuBar: MenuBar {
-//            Menu {
-//                title: qsTr("&File")
-//                Action { text: qsTr("&New..."); onTriggered: console.debug("new pressed"); }
-//                Action { text: qsTr("&Open..."); onTriggered: console.debug("open pressed"); }
-//                Action { text: qsTr("&Save"); onTriggered: console.debug("save pressed"); }
-//                Action { text: qsTr("Save &As..."); onTriggered: console.debug("save as pressed"); }
-//                MenuSeparator { }
-//                Action { text: qsTr("&Quit"); onTriggered: console.debug("quit pressed"); }
-//            }
-//            Menu {
-//                title: qsTr("&Edit")
-//                Action { text: qsTr("Cu&t"); onTriggered: console.debug("cut pressed"); }
-//                Action { text: qsTr("&Copy"); onTriggered: console.debug("copy pressed"); }
-//                Action { text: qsTr("&Paste"); onTriggered: console.debug("paste pressed"); }
-//            }
-//            Menu {
-//                title: qsTr("&Help")
-//                Action { text: qsTr("&About"); onTriggered: console.debug("about pressed"); }
-//            }
-//        }
+    menuBar: MenuBar {
+            Menu {
+                title: qsTr("&File")
+                Action { text: qsTr("&New..."); onTriggered: console.debug("new pressed"); }
+                Action { text: qsTr("&Open..."); onTriggered: console.debug("open pressed"); }
+                Action { text: qsTr("&Save"); onTriggered: console.debug("save pressed"); }
+                Action { text: qsTr("Save &As..."); onTriggered: console.debug("save as pressed"); }
+                MenuSeparator { }
+                Action { text: qsTr("&Quit"); onTriggered: console.debug("quit pressed"); }
+            }
+            Menu {
+                title: qsTr("&Edit")
+                Action { text: qsTr("Cu&t"); onTriggered: console.debug("cut pressed"); }
+                Action { text: qsTr("&Copy"); onTriggered: console.debug("copy pressed"); }
+                Action { text: qsTr("&Paste"); onTriggered: console.debug("paste pressed"); }
+            }
+            Menu {
+                title: qsTr("&Help")
+                Action { text: qsTr("&About"); onTriggered: console.debug("about pressed"); }
+            }
+        }
 }

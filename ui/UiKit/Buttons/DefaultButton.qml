@@ -1,5 +1,7 @@
 import QtQuick 2.0
 
+import "../colors.js" as Colors
+
 Item
 {
     id: root
@@ -16,8 +18,7 @@ Item
         id: background
 
         anchors.fill: parent
-//        color: mouseArea.pressed ? Colors.pressedButtonColor : Colors.buttonColor
-        color: mouseArea.pressed ? "#00ff00" : "#ff0000"
+        color: mouseArea.pressed ? Colors.ButtonColorPressed : Colors.ButtonColorReleased
     }
 
     Text {
