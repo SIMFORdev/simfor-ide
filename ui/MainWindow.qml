@@ -1,11 +1,15 @@
-import QtQuick 2.9
+import QtQuick 2.12
 import QtQuick.Window 2.0
 import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.3
 import QtQuick.Dialogs 1.2
 import QtQml.Models 2.2
+import Qt.labs.folderlistmodel 2.12
+import QtQml 2.12
 
 import "UiKit/Buttons"
+
+import "panels/fileSystemPanel"
 
 ApplicationWindow {
     id: root;
@@ -34,7 +38,6 @@ ApplicationWindow {
         color: "blue"
 
         ListView {
-
             id: listview
 
             anchors.top: parent.top;
@@ -42,19 +45,20 @@ ApplicationWindow {
             anchors.left: parent.left;
             anchors.right: parent.right;
 
-            delegate: Item {
-                id: item
-                anchors.left: parent.left;
-                anchors.right: parent.right;
-                height: 40
-                Text {
-                    id: text
-                    text: sometext
-                }
+            orientation: ListView.Vertical
+
+            model: FolderListModel {
+                id: folderModel
+                folder: "file:///home/vadim/programs/qt-creator/SIMFORIDE/"
+                showDirsFirst: true
+                sortField: Name
             }
 
-            model: ListModel {
-                id: listmodel
+            delegate: FileSystemPanel {
+                id: fileSystemPanel
+                name: fileName
+                isFolder: fileIsDir
+                levelNum: 0
             }
         }
     }
@@ -74,8 +78,8 @@ ApplicationWindow {
 
     Rectangle {
         id: rect
-        x: 50
-        y: 50
+        x: 200
+        y: 200
         DefaultButton {
             id: but
             name: "temp"
@@ -107,4 +111,11 @@ ApplicationWindow {
                 Action { text: qsTr("&About"); onTriggered: console.debug("about pressed"); }
             }
         }
+
+    TestWidget {
+        id: test
+        x: 400
+        y: 400
+    }
+
 }

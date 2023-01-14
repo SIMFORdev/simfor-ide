@@ -3,6 +3,8 @@
         <file>ui/MainWindow.qml</file>
         <file>ui/UiKit/Buttons/DefaultButton.qml</file>
         <file>ui/UiKit/colors.js</file>
+        <file>ui/panels/fileSystemPanel/FileSystemPanel.qml</file>
+        <file>ui/TestWidget.qml</file>
     </qresource>
     <qresource prefix="/fonts">
         <file>ui/fonts/JetBrainsMonoNL-Thin.ttf</file>
