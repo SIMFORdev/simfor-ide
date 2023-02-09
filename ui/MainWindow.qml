@@ -1,11 +1,13 @@
-import QtQuick 2.12
+﻿import QtQuick 2.12
 import QtQuick.Window 2.0
 import QtQuick.Controls 2.12
+import QtQuick.Controls 1.4
 import QtQuick.Layouts 1.3
 import QtQuick.Dialogs 1.2
 import QtQml.Models 2.2
 import Qt.labs.folderlistmodel 2.12
 import QtQml 2.12
+import io.qt.examples.quick.controls.filesystembrowser 1.0
 
 import "UiKit/Buttons"
 
@@ -37,7 +39,12 @@ ApplicationWindow {
 
         color: "blue"
 
-        ListView {
+        ItemSelectionModel {
+            id: sel
+            model: fileSystemModel
+        }
+
+        TreeView {
             id: listview
 
             anchors.top: parent.top;
@@ -45,25 +52,40 @@ ApplicationWindow {
             anchors.left: parent.left;
             anchors.right: parent.right;
 
-            orientation: ListView.Vertical
-
-            model: FolderListModel {
-                id: folderModel
-                folder: "file:///home/vadim/programs/qt-creator/SIMFORIDE/"
-                showDirsFirst: true
-                sortField: Name
+            TableViewColumn {
+                title: "file"
+                role: "fileName"
+                width: filesRect.width
             }
 
-            delegate: FileSystemPanel {
-                id: fileSystemPanel
-                name: fileName
-                isFolder: fileIsDir
-                levelNum: 0
+//            model: FolderListModel {
+//                id: folderModel
+//                folder: "file:///home/vadim/programs/qt-creator/SIMFORIDE/"
+//                showDirsFirst: true
+//                sortField: Name
+//            }
+
+//            model: fileSystemModel
+            model: fileSystemModel
+            rootIndex: rootPathIndex
+            selection: sel
+
+//            itemDelegate: FileSystemPanel {
+//                id: fileSystemPanel
+//                name: styleData.value
+//                isFolder: folderModel.isFolder(styleData.row)
+//                levelNum: 0
+//                onAdd_new:  function() {
+//                    console.log("folder pressed")
+//                }
+//                Component.onCompleted: console.log(folderModel)
+//            }
+            onActivated : {
+                var url = fileSystemModel.data(index, FileSystemModel.UrlStringRole)
+                Qt.openUrlExternally(url)
             }
         }
     }
-
-    property int iter: 0
 
     Rectangle {
         id: workspaceRect
@@ -74,20 +96,6 @@ ApplicationWindow {
         width: parent.width
 
         color: "yellow"
-    }
-
-    Rectangle {
-        id: rect
-        x: 200
-        y: 200
-        DefaultButton {
-            id: but
-            name: "temp"
-            onClicked: function() {
-                listmodel.append({sometext: iter + " wow"})
-                iter += 1
-            }
-        }
     }
 
     menuBar: MenuBar {
@@ -111,11 +119,4 @@ ApplicationWindow {
                 Action { text: qsTr("&About"); onTriggered: console.debug("about pressed"); }
             }
         }
-
-    TestWidget {
-        id: test
-        x: 400
-        y: 400
-    }
-
 }

@@ -11,8 +11,6 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-#add_compile_options(-Dplatform wayland)
-
 find_package(Qt5 COMPONENTS REQUIRED
                                     Widgets
                                     Qml
@@ -22,10 +20,10 @@ find_package(Qt5 COMPONENTS REQUIRED
 
 qt5_add_resources(RESOURCES resources.qrc)
 
+add_subdirectory(src)
+
 set(PROJECT_SOURCES
         src/main.cpp
-        src/mainform.cpp
-        src/mainform.h
 )
 
 add_executable(${PROJECT_NAME}
@@ -33,12 +31,9 @@ add_executable(${PROJECT_NAME}
     ${RESOURCES}
 )
 
-#target_link_libraries(${PROJECT_NAME} PRIVATE Qt${QT_VERSION_MAJOR}::Core)
-#target_link_libraries(${PROJECT_NAME} PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
-#target_link_libraries(${PROJECT_NAME} PRIVATE Qt${QT_VERSION_MAJOR}::Qml)
-#target_link_libraries(${PROJECT_NAME} PRIVATE Qt${QT_VERSION_MAJOR}::Quick)
+target_link_libraries(${PROJECT_NAME} PRIVATE mainform)
 
-target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Core)
-target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Widgets)
-target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Qml)
-target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Quick)
+target_link_libraries(${PROJECT_NAME} PUBLIC Qt5::Core)
+target_link_libraries(${PROJECT_NAME} PUBLIC Qt5::Widgets)
+target_link_libraries(${PROJECT_NAME} PUBLIC Qt5::Qml)
+target_link_libraries(${PROJECT_NAME} PUBLIC Qt5::Quick)

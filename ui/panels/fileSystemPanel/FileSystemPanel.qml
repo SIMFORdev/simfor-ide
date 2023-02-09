@@ -1,4 +1,9 @@
 import QtQuick 2.12
+import QtQuick.Window 2.0
+import QtQuick.Controls 2.12
+import QtQuick.Controls 1.4
+import QtQuick.Layouts 1.3
+import QtQuick.Dialogs 1.2
 import QtQml.Models 2.2
 import Qt.labs.folderlistmodel 2.12
 import QtQml 2.12
@@ -11,7 +16,10 @@ Item {
     property int levelNum
     property string name
 
-    anchors.fill: parent
+    signal add_new()
+
+    anchors.left: parent.left
+    anchors.right: parent.right
     implicitHeight: 20
 
     Rectangle {
@@ -20,8 +28,9 @@ Item {
         implicitHeight: 20
         height: 20
 
-        anchors.left: parent.left
-        anchors.right: parent.right
+        anchors.fill: parent
+
+        color: "grey"
 
         Rectangle {
             id: freeSpace
@@ -51,7 +60,7 @@ Item {
                     anchors.top: button.top
                     anchors.bottom: button.bottom
                     onClicked: function() {
-                        console.log("pressed")
+                        add_new()
                     }
                 }
             }

@@ -21,7 +21,7 @@ Item {
             onClicked: function() {
                 console.log("clicked test zone")
                 var component = Qt.createComponent("TestWidget.qml");
-                if (component.status == Component.Ready) {
+                if (component.status === Component.Ready) {
                     component.createObject(parent, {"x": 100 + count * 100, "y": 100 + count * 100});
                 }
                 count += 1
