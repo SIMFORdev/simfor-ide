@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(filemodel)
+project(filesystemmodel)
 
 find_package(Qt5 COMPONENTS REQUIRED
                                     Widgets
@@ -9,7 +9,7 @@ find_package(Qt5 COMPONENTS REQUIRED
                                     Core
 )
 
-add_library(${PROJECT_NAME} STATIC filemodel.cpp)
+add_library(${PROJECT_NAME} STATIC filesystemmodel.cpp filesystemmodel.h)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Core)
 target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Widgets)

@@ -4,7 +4,7 @@
 #include <QWidget>
 #include <QQmlApplicationEngine>
 #include <QtQml>
-#include <QFileSystemModel>
+#include "filesystemmodel.h"
 
 class MainForm : public QObject
 {
@@ -19,6 +19,6 @@ public:
 private:
     QQmlApplicationEngine* qml_app_engine;
     QObject* qml_app_root_object;
-    QFileSystemModel *model;
+    FileSystemModel *model;
 };
 #endif // MAINFORM_H

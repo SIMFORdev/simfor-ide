@@ -16,4 +16,6 @@ target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Widgets)
 target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Qml)
 target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Quick)
 
+target_link_libraries(${PROJECT_NAME} PUBLIC filesystemmodel)
+
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

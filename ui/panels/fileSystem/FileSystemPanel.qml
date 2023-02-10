@@ -8,7 +8,6 @@ import QtQml.Models 2.2
 import Qt.labs.folderlistmodel 2.12
 import QtQml 2.12
 
-
 Item {
     id: root
 

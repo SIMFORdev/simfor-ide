@@ -5,13 +5,11 @@ import QtQuick.Controls 1.4
 import QtQuick.Layouts 1.3
 import QtQuick.Dialogs 1.2
 import QtQml.Models 2.2
-import Qt.labs.folderlistmodel 2.12
 import QtQml 2.12
-import io.qt.examples.quick.controls.filesystembrowser 1.0
 
 import "UiKit/Buttons"
 
-import "panels/fileSystemPanel"
+import "panels/fileSystem"
 
 ApplicationWindow {
     id: root;
@@ -30,68 +28,19 @@ ApplicationWindow {
         color: "red"
     }
 
-    Rectangle {
-        id: filesRect
+    FileSystemView {
+        id: fileSystem
 
         anchors.top: commandPanelRect.bottom
         height: parent.height
         width: 300
-
-        color: "blue"
-
-        ItemSelectionModel {
-            id: sel
-            model: fileSystemModel
-        }
-
-        TreeView {
-            id: listview
-
-            anchors.top: parent.top;
-            anchors.bottom: parent.bottom;
-            anchors.left: parent.left;
-            anchors.right: parent.right;
-
-            TableViewColumn {
-                title: "file"
-                role: "fileName"
-                width: filesRect.width
-            }
-
-//            model: FolderListModel {
-//                id: folderModel
-//                folder: "file:///home/vadim/programs/qt-creator/SIMFORIDE/"
-//                showDirsFirst: true
-//                sortField: Name
-//            }
-
-//            model: fileSystemModel
-            model: fileSystemModel
-            rootIndex: rootPathIndex
-            selection: sel
-
-//            itemDelegate: FileSystemPanel {
-//                id: fileSystemPanel
-//                name: styleData.value
-//                isFolder: folderModel.isFolder(styleData.row)
-//                levelNum: 0
-//                onAdd_new:  function() {
-//                    console.log("folder pressed")
-//                }
-//                Component.onCompleted: console.log(folderModel)
-//            }
-            onActivated : {
-                var url = fileSystemModel.data(index, FileSystemModel.UrlStringRole)
-                Qt.openUrlExternally(url)
-            }
-        }
     }
 
     Rectangle {
         id: workspaceRect
 
         anchors.top: commandPanelRect.bottom
-        anchors.left: filesRect.right
+        anchors.left: fileSystem.right
         height: parent.height
         width: parent.width
 
