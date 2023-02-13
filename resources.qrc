@@ -3,7 +3,6 @@
         <file>ui/MainWindow.qml</file>
         <file>ui/UiKit/Buttons/DefaultButton.qml</file>
         <file>ui/UiKit/colors.js</file>
-        <file>ui/TestWidget.qml</file>
         <file>ui/panels/fileSystem/FileSystemView.qml</file>
         <file>ui/panels/fileSystem/FileSystemPanel.qml</file>
     </qresource>

@@ -50,7 +50,7 @@ Item {
 //                name: styleData.value
 //                isFolder: fileSystemModel.isDirectory()
 //                levelNum: 0
-//                onAdd_new:  function() {
+//                onAdd_new: function() {
 //                    console.log("folder pressed")
 //                }
 //            }
