@@ -11,6 +11,7 @@ import QtQuick.Controls.Styles 1.4
 import "UiKit/Buttons"
 
 import "panels/fileSystem"
+import "panels/workspacePanel"
 
 ApplicationWindow {
     id: root;
@@ -37,187 +38,90 @@ ApplicationWindow {
         width: 300
     }
 
-    Rectangle {
-        id: workspaceRect
+    WorkspaceView {
+        id: wv
 
         anchors.top: commandPanelRect.bottom
         anchors.left: fileSystem.right
         height: parent.height
         width: parent.width
+    }
 
-        color: "yellow"
 
-        TabView {
-            anchors.fill: parent
-            Tab {
-                title: "Red"
-                Rectangle { color: "red" }
-            }
-            Tab {
-                title: "Blue"
-                Rectangle { color: "blue" }
-            }
-            Tab {
-                title: "Green"
-                Rectangle { color: "green" }
-            }
-            Tab {
-                title: "Red"
-                Rectangle { color: "red" }
-            }
-            Tab {
-                title: "Blue"
-                Rectangle { color: "blue" }
-            }
-            Tab {
-                title: "Green"
-                Rectangle { color: "green" }
-            }
-            Tab {
-                title: "Red"
-                Rectangle { color: "red" }
-            }
-            Tab {
-                title: "Blue"
-                Rectangle { color: "blue" }
-            }
-            Tab {
-                title: "Green"
-                Rectangle { color: "green" }
-            }
-            Tab {
-                title: "Red"
-                Rectangle { color: "red" }
-            }
-            Tab {
-                title: "Blue"
-                Rectangle { color: "blue" }
-            }
-            Tab {
-                title: "Green"
-                Rectangle { color: "green" }
-            }
-            Tab {
-                title: "Red"
-                Rectangle { color: "red" }
-            }
-            Tab {
-                title: "Blue"
-                Rectangle { color: "blue" }
-            }
-            Tab {
-                title: "Green"
-                Rectangle { color: "green" }
-            }
-            Tab {
-                title: "Red"
-                Rectangle { color: "red" }
-            }
-            Tab {
-                title: "Blue"
-                Rectangle { color: "blue" }
-            }
-            Tab {
-                title: "Green"
-                Rectangle { color: "green" }
-            }
-            Tab {
-                title: "Red"
-                Rectangle { color: "red" }
-            }
-            Tab {
-                title: "Blue"
-                Rectangle { color: "blue" }
-            }
-            Tab {
-                title: "Green"
-                Rectangle { color: "green" }
-            }
-            Tab {
-                title: "Red"
-                Rectangle { color: "red" }
-            }
-            Tab {
-                title: "Blue"
-                Rectangle { color: "blue" }
-            }
-            Tab {
-                title: "Green"
-                Rectangle { color: "green" }
-            }
+//    Rectangle {
+//        id: workspaceRect
 
-//            Flickable {
-//                id: flickable
-//                clip: true
-//                // ...
-//                ScrollBar.horizontal: ScrollBar {
-//                    parent: flickable.parent
-//                    anchors.top: flickable.top
-//                    anchors.left: flickable.right
-//                    anchors.bottom: flickable.bottom
+//        anchors.top: commandPanelRect.bottom
+//        anchors.left: fileSystem.right
+//        height: parent.height
+//        width: parent.width
+
+//        color: "yellow"
+
+//        TabBar {
+//            id: bar
+//            width: parent.width
+//            anchors.top: workspaceRect.top
+//            TabButton {
+//                text: qsTr("Home")
+//                width: implicitWidth
+//            }
+//            TabButton {
+//                text: qsTr("Discover")
+//                width: implicitWidth
+//            }
+//            TabButton {
+//                text: qsTr("Activity")
+//                width: implicitWidth
+//            }
+//        }
+
+//        StackLayout {
+//            id: stl
+//            width: parent.width
+//            currentIndex: bar.currentIndex
+//            anchors.top: bar.bottom
+//            Item {
+//                id: homeTab
+//                Rectangle {
+//                    width: 500
+//                    height: 500
+//                    color: "red"
 //                }
 //            }
-
-
-            ScrollView {
-                id: view
-                contentItem: parent.style.control
-                frameVisible: true
-                horizontalScrollBarPolicy: Qt.ScrollBarAlwaysOn
-                style: parent.style.control
-            }
-
-            style: TabViewStyle {
-                    frameOverlap: 1
-                    tabsMovable: true
-                    tabOverlap: 1
-                    tab: Rectangle {
-                        color: styleData.selected ? "steelblue" :"lightsteelblue"
-                        border.color:  "steelblue"
-                        implicitWidth: Math.max(text.width + 4, 80)
-                        implicitHeight: 20
-                        radius: 2
-                        Text {
-                            id: text
-                            anchors.centerIn: parent
-                            text: styleData.title
-                            color: styleData.selected ? "white" : "black"
-                        }
-                    }
-
-                    tabBar: Rectangle {
-                        color: "white"
-                    }
-
-                    frame: Rectangle { color: "steelblue" }
-                }
-
-        }
-
-//        Rectangle {
-//            id: tabs
-//            color: "black"
-
-//            anchors.top: workspaceRect.top
-//            anchors.left: workspaceRect.left
-//            anchors.right: workspaceRect.right
-
-//            height: 50
+//            Item {
+//                id: discoverTab
+//                Rectangle {
+//                    width: 500
+//                    height: 500
+//                    color: "white"
+//                }
+//            }
+//            Item {
+//                id: activityTab
+//                Rectangle {
+//                    width: 500
+//                    height: 500
+//                    color: "green"
+//                }
+//            }
 //        }
 
-//        Rectangle {
-//            id: texteditor
+//        DefaultButton {
+//            width: 100
+//            height: 100
+//            anchors.top: stl.bottom
+//            anchors.left: fileSystem.right
+//            onClicked: function() {
+//                var tab = Qt.createComponent("Test.qml");
+//                var tab_s = tab.createObject(Test, {text: "fuck"})
+//                bar.addItem(tab_s);
 
-//            color: "white"
-
-//            anchors.top: tabs.bottom
-//            anchors.left: workspaceRect.left
-//            anchors.right: workspaceRect.right
-//            height: root.height
-
+//                var item = Item.createObject(Item, {id: "tabName"})
+//                stl.children.push(item)
+//            }
 //        }
-
-    }
+//    }
 
     menuBar: MenuBar {
             Menu {

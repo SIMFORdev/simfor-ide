@@ -5,6 +5,10 @@
         <file>ui/UiKit/colors.js</file>
         <file>ui/panels/fileSystem/FileSystemView.qml</file>
         <file>ui/panels/fileSystem/FileSystemPanel.qml</file>
+        <file>ui/Test.qml</file>
+        <file>ui/panels/workspacePanel/WorkspaceView.qml</file>
+        <file>ui/panels/workspacePanel/WTabButton.qml</file>
+        <file>ui/panels/workspacePanel/WCodeEditor.qml</file>
     </qresource>
     <qresource prefix="/fonts">
         <file>ui/fonts/JetBrainsMonoNL-Thin.ttf</file>
