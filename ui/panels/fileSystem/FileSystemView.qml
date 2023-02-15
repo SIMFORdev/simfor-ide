@@ -10,6 +10,8 @@ import Qt.labs.folderlistmodel 2.12
 import QtQml 2.12
 import FileSystemModel 1.0
 
+import "../../UiKit/colors.js" as Colors
+
 Item {
     id: root
 
@@ -22,7 +24,7 @@ Item {
         height: parent.height
         width: 300
 
-        color: "blue"
+        color: Colors.MainColor
 
         TreeView {
             id: listview

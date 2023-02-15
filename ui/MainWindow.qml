@@ -10,6 +10,8 @@ import QtQuick.Controls.Styles 1.4
 
 import "UiKit/Buttons"
 
+import "UiKit/colors.js" as Colors
+
 import "panels/fileSystem"
 import "panels/workspacePanel"
 
@@ -20,6 +22,11 @@ ApplicationWindow {
     height: 1080 * 0.8;
 
     visibility: showMaximized();
+
+    FontLoader {
+        id: robotoRegular;
+        source: "ui/fonts/JetBrainsMono-Regular.ttf"
+    }
 
     Rectangle {
         id: commandPanelRect
@@ -46,82 +53,6 @@ ApplicationWindow {
         height: parent.height
         width: parent.width - 500
     }
-
-
-//    Rectangle {
-//        id: workspaceRect
-
-//        anchors.top: commandPanelRect.bottom
-//        anchors.left: fileSystem.right
-//        height: parent.height
-//        width: parent.width
-
-//        color: "yellow"
-
-//        TabBar {
-//            id: bar
-//            width: parent.width
-//            anchors.top: workspaceRect.top
-//            TabButton {
-//                text: qsTr("Home")
-//                width: implicitWidth
-//            }
-//            TabButton {
-//                text: qsTr("Discover")
-//                width: implicitWidth
-//            }
-//            TabButton {
-//                text: qsTr("Activity")
-//                width: implicitWidth
-//            }
-//        }
-
-//        StackLayout {
-//            id: stl
-//            width: parent.width
-//            currentIndex: bar.currentIndex
-//            anchors.top: bar.bottom
-//            Item {
-//                id: homeTab
-//                Rectangle {
-//                    width: 500
-//                    height: 500
-//                    color: "red"
-//                }
-//            }
-//            Item {
-//                id: discoverTab
-//                Rectangle {
-//                    width: 500
-//                    height: 500
-//                    color: "white"
-//                }
-//            }
-//            Item {
-//                id: activityTab
-//                Rectangle {
-//                    width: 500
-//                    height: 500
-//                    color: "green"
-//                }
-//            }
-//        }
-
-//        DefaultButton {
-//            width: 100
-//            height: 100
-//            anchors.top: stl.bottom
-//            anchors.left: fileSystem.right
-//            onClicked: function() {
-//                var tab = Qt.createComponent("Test.qml");
-//                var tab_s = tab.createObject(Test, {text: "fuck"})
-//                bar.addItem(tab_s);
-
-//                var item = Item.createObject(Item, {id: "tabName"})
-//                stl.children.push(item)
-//            }
-//        }
-//    }
 
     menuBar: MenuBar {
             Menu {

@@ -8,6 +8,8 @@ import QtQml.Models 2.2
 import QtQml 2.12
 import QtQuick.Controls.Styles 1.4
 
+import "../../UiKit/colors.js" as Colors
+
 Item {
     id: root
 
@@ -52,23 +54,16 @@ Item {
 
         anchors.fill: parent
 
-        color: "yellow"
+        color: Colors.SecondColor
 
         TabBar {
             id: tabbar
+            contentHeight: 30
             width: workspaceRect.width
-            anchors.top: workspaceRect.top
-            anchors.left: workspaceRect.left
-            anchors.right: workspaceRect.right
             clip: true
-//            ScrollBar.horizontal: ScrollBar{
-//                parent: tabbar
-//                anchors.fill: tabbar
-//            }
-            MouseArea {
-                id: mousearea
-                anchors.fill: parent
 
+            background: Rectangle {
+                color: Colors.MainColor
             }
 
             Repeater {
