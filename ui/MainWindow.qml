@@ -44,7 +44,7 @@ ApplicationWindow {
         anchors.top: commandPanelRect.bottom
         anchors.left: fileSystem.right
         height: parent.height
-        width: parent.width
+        width: parent.width - 500
     }
 
 
