@@ -16,32 +16,18 @@ Item {
     property string temp_value: "#include <iostream> int main() { std::cout << \"Hello\";  }"
     property int counter: 0
 
-    property var wtabbutton
     property var wcodeeditor
 
     function init_components() {
-        wtabbutton = Qt.createComponent("WTabButton.qml");
         wcodeeditor = Qt.createComponent("WCodeEditor.qml");
     }
 
-    function delete_tab(index) {
-        tabbarmodel.get(index).destroy()
-        tabbarmodel.remove(index, 1)
-        stacklayoutmodel.get(index).destroy()
-        stacklayoutmodel.remove(index, 1)
-        console.log("Delete " + index.toString())
-    }
-
     function create_tab(filename, filecontent) {
-        var tab = wtabbutton.createObject(tabbar, {
-                                              id: "root",
-                                              index: counter,
-                                              text: qsTr(filename),
-                                              onCloseClicked: delete_tab
-                                          })
-        tabbarmodel.append(tab)
-
-
+        var tab = {
+            "tab_index": tabbar.count,
+            "tab_text": qsTr(filename)
+        }
+        tabbarrepeatermodel.append(tab)
         counter++;
 
         var editor = wcodeeditor.createObject(stacklayout, {
@@ -51,6 +37,13 @@ Item {
         stacklayoutmodel.append(editor)
 
         tabbar.incrementCurrentIndex()
+    }
+
+    function delete_tab(index) {
+        tabbarrepeatermodel.remove(index, 1)
+        stacklayoutmodel.get(index).destroy()
+        stacklayoutmodel.remove(index, 1)
+        console.log("Delete " + index.toString())
     }
 
     Component.onCompleted: init_components()
@@ -73,8 +66,15 @@ Item {
             }
 
             Repeater {
-                model: ObjectModel {
-                    id: tabbarmodel
+                id: tabbarrepeater
+                model: ListModel {
+                    id: tabbarrepeatermodel
+                }
+
+                WTabButton {
+                    index: tab_index
+                    text: tab_text
+                    onCloseClicked: delete_tab(idx)
                 }
             }
         }

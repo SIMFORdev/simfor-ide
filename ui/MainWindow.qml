@@ -25,7 +25,7 @@ ApplicationWindow {
 
     FontLoader {
         id: robotoRegular;
-        source: "ui/fonts/JetBrainsMono-Regular.ttf"
+        source: "qrc:/fonts/ui/fonts/JetBrainsMono-Regular.ttf"
     }
 
     Rectangle {
