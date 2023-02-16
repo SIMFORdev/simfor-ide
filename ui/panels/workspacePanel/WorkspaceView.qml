@@ -24,9 +24,20 @@ Item {
         wcodeeditor = Qt.createComponent("WCodeEditor.qml");
     }
 
+    function delete_tab(index) {
+        tabbarmodel.get(index).destroy()
+        tabbarmodel.remove(index, 1)
+        stacklayoutmodel.get(index).destroy()
+        stacklayoutmodel.remove(index, 1)
+        console.log("Delete " + index.toString())
+    }
+
     function create_tab(filename, filecontent) {
         var tab = wtabbutton.createObject(tabbar, {
-                                              text: qsTr(filename)
+                                              id: "root",
+                                              index: counter,
+                                              text: qsTr(filename),
+                                              onCloseClicked: delete_tab
                                           })
         tabbarmodel.append(tab)
 
@@ -40,11 +51,6 @@ Item {
         stacklayoutmodel.append(editor)
 
         tabbar.incrementCurrentIndex()
-    }
-
-    function delete_tab(index) {
-        tabbarmodel.remove(index, 1)
-        stacklayoutmodel.remove(index, 1)
     }
 
     Component.onCompleted: init_components()

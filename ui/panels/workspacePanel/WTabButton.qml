@@ -1,3 +1,4 @@
+import QtQml 2.12
 import QtQuick 2.12
 import QtQuick.Controls 2.12
 
@@ -6,7 +7,8 @@ import "../../UiKit/colors.js" as Colors
 TabButton {
     id: root
 
-    signal closeClicked()
+    property int index
+    signal closeClicked(int idx)
 
     width: contentitem.contWidth
 
@@ -40,9 +42,10 @@ TabButton {
             MouseArea {
                 id: closemousearea
                 anchors.fill: parent
+
                 onClicked: {
                     console.log("Close tab")
-                    closeClicked()
+                    root.closeClicked(index)
                 }
             }
         }
