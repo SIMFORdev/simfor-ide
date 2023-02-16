@@ -74,7 +74,7 @@ Item {
                 WTabButton {
                     index: tab_index
                     text: tab_text
-                    onCloseClicked: delete_tab(idx)
+                    onCloseClicked: (idx) => delete_tab(idx)
                 }
             }
         }
@@ -97,15 +97,6 @@ Item {
             anchors.top: stacklayout.top
             text: "Create"
             onClicked: create_tab("File.cpp", temp_value)
-        }
-        Button {
-            id: ccc
-            width: 100
-            height: 100
-            anchors.top: stacklayout.top
-            anchors.left: bbb.right
-            text: "Delete"
-            onClicked: delete_tab(tabbar.currentIndex)
         }
     }
 }
