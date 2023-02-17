@@ -11,3 +11,5 @@ var TextColor = "#b6b9ba"
 var TabButtonColor = MainColor
 var TabButtonColorPressed = "#4e5254"
 var TabButtonColorFocused = "#27292a"
+var TabButtonActiveCloseColorFocused = "#676f73"
+var TabButtonNotActiveCloseColorFocused = "#535a5e"

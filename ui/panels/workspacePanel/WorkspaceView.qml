@@ -13,40 +13,38 @@ import "../../UiKit/colors.js" as Colors
 Item {
     id: root
 
-    property string temp_value: "#include <iostream> int main() { std::cout << \"Hello\";  }"
+    property string temp_value: "#include <iostream>\n int main() { std::cout << \"Hello\";  }"
     property int counter: 0
 
     property var wcodeeditor
 
-    function init_components() {
-        wcodeeditor = Qt.createComponent("WCodeEditor.qml");
-    }
-
     function create_tab(filename, filecontent) {
+        var content = counter.toString() + " button"
+
         var tab = {
             "tab_index": tabbar.count,
-            "tab_text": qsTr(filename)
+            "tab_text": content
         }
         tabbarrepeatermodel.append(tab)
+
+
+        var editor = {
+            "editor_content": content,
+            "editor_color": Qt.rgba(Math.random(), Math.random(), Math.random(), 1).toString()
+        }
+        slrepeatermodel.append(editor)
+
         counter++;
-
-        var editor = wcodeeditor.createObject(stacklayout, {
-                                                  filecontent: counter.toString(),
-                                                  rec_color: Qt.rgba(Math.random(), Math.random(), Math.random(), 1)
-                                              })
-        stacklayoutmodel.append(editor)
-
         tabbar.incrementCurrentIndex()
     }
 
     function delete_tab(index) {
         tabbarrepeatermodel.remove(index, 1)
-        stacklayoutmodel.get(index).destroy()
-        stacklayoutmodel.remove(index, 1)
-        console.log("Delete " + index.toString())
+        slrepeatermodel.remove(index, 1)
+        for (var i = 0; i < tabbar.count; ++i) {
+            tabbarrepeatermodel.setProperty(i, "tab_index", i)
+        }
     }
-
-    Component.onCompleted: init_components()
 
     Rectangle {
         id: workspaceRect
@@ -73,6 +71,7 @@ Item {
 
                 WTabButton {
                     index: tab_index
+                    activeIndex: tabbar.currentIndex
                     text: tab_text
                     onCloseClicked: (idx) => delete_tab(idx)
                 }
@@ -85,8 +84,13 @@ Item {
             currentIndex: tabbar.currentIndex
             anchors.top: tabbar.bottom
             Repeater {
-                model: ObjectModel {
-                    id: stacklayoutmodel
+                id: slrepeater
+                model: ListModel {
+                    id: slrepeatermodel
+                }
+                WCodeEditor {
+                    filecontent: editor_content
+                    rec_color: editor_color
                 }
             }
         }

@@ -8,9 +8,12 @@ TabButton {
     id: root
 
     property int index
+    property int activeIndex
+    property bool containMouse: tabmousearea.containsMouse || closemousearea.containsMouse
     signal closeClicked(int idx)
 
     width: contentitem.contWidth
+    rightPadding: 3
 
     contentItem: Rectangle {
         id: contentitem
@@ -36,15 +39,26 @@ TabButton {
         Rectangle {
             id: close
             width: 20
-            height: root.height
+            height: label.height
             color: Colors.TransparentColor
             anchors.left: label.right
+            anchors.margins: 0
+            Rectangle {
+                id: circle
+                width: parent.width / 2
+                height: circle.width
+                anchors.centerIn: parent
+                color: closemousearea.containsMouse
+                       ? Colors.TabButtonNotActiveCloseColorFocused
+                       : Colors.TransparentColor
+                radius: circle.width / 2
+            }
+
             MouseArea {
                 id: closemousearea
                 anchors.fill: parent
-
+                hoverEnabled: true
                 onClicked: {
-                    console.log("Close tab")
                     root.closeClicked(index)
                 }
             }
@@ -56,10 +70,22 @@ TabButton {
         width: root.width
         height: root.height
         color: {
-            if (root.focus) {
-                return Colors.TabButtonColorFocused
+            if (index === activeIndex) {
+                return Colors.TabButtonColorPressed
             } else {
-                return Colors.TabButtonColor
+                if (containMouse) {
+                    return Colors.TabButtonColorFocused
+                } else {
+                    return Colors.TabButtonColor
+                }
+            }
+        }
+        MouseArea {
+            id: tabmousearea
+            anchors.fill: parent
+            hoverEnabled: true
+            onClicked: {
+
             }
         }
     }
