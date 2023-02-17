@@ -73,7 +73,8 @@ Item {
                     index: tab_index
                     activeIndex: tabbar.currentIndex
                     text: tab_text
-                    onCloseClicked: (idx) => delete_tab(idx)
+                    onButtonClicked: idx => tabbar.setCurrentIndex(idx)
+                    onCloseClicked: idx => delete_tab(idx)
                 }
             }
         }

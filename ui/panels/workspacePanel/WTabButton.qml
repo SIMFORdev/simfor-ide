@@ -10,7 +10,9 @@ TabButton {
     property int index
     property int activeIndex
     property bool containMouse: tabmousearea.containsMouse || closemousearea.containsMouse
+    property bool isActiveTab: index === activeIndex
     signal closeClicked(int idx)
+    signal buttonClicked(int idx)
 
     width: contentitem.contWidth
     rightPadding: 3
@@ -45,13 +47,22 @@ TabButton {
             anchors.margins: 0
             Rectangle {
                 id: circle
-                width: parent.width / 2
+                width: parent.width - 8
                 height: circle.width
                 anchors.centerIn: parent
                 color: closemousearea.containsMouse
-                       ? Colors.TabButtonNotActiveCloseColorFocused
-                       : Colors.TransparentColor
+                           ? isActiveTab
+                                  ? Colors.TabButtonActiveCloseColorFocused
+                                  : Colors.TabButtonNotActiveCloseColorFocused
+                           : Colors.TransparentColor
                 radius: circle.width / 2
+                Image {
+                    id: imageClose
+                    source: "/icons/ui/icons/cross.svg"
+                    width: parent.width
+                    height: parent.height
+                    anchors.centerIn: parent
+                }
             }
 
             MouseArea {
@@ -70,7 +81,7 @@ TabButton {
         width: root.width
         height: root.height
         color: {
-            if (index === activeIndex) {
+            if (isActiveTab) {
                 return Colors.TabButtonColorPressed
             } else {
                 if (containMouse) {
@@ -85,7 +96,7 @@ TabButton {
             anchors.fill: parent
             hoverEnabled: true
             onClicked: {
-
+                buttonClicked(root.index)
             }
         }
     }
