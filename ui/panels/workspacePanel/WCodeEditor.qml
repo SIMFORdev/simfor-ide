@@ -22,6 +22,12 @@ Item {
                 id: code_place
                 text: qsTr(filecontent)
             }
+            TextInput {
+                id: textinput
+                anchors.top: code_place.bottom
+                width: 300
+                height: 300
+            }
         }
     }
 }
