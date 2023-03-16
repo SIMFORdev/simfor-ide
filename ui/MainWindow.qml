@@ -41,17 +41,22 @@ ApplicationWindow {
         id: fileSystem
 
         anchors.top: commandPanelRect.bottom
-        height: parent.height
-        width: 300
+        height: parent.height - commandPanelRect.height
+        width: 50
     }
 
     WorkspaceView {
-        id: wv
+        id: workspaceView
 
         anchors.top: commandPanelRect.bottom
         anchors.left: fileSystem.right
-        height: parent.height
-        width: parent.width - 500
+        height: parent.height - commandPanelRect.height
+        width: parent.width - fileSystem.width
+    }
+
+    Shortcut {
+        sequence: "Ctrl+N"
+        onActivated: workspaceView.create_tab("File", "")
     }
 
     menuBar: MenuBar {
@@ -74,5 +79,5 @@ ApplicationWindow {
                 title: qsTr("&Help")
                 Action { text: qsTr("&About"); onTriggered: console.debug("about pressed"); }
             }
-        }
+        } 
 }

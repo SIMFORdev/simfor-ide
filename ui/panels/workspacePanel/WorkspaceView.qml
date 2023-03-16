@@ -13,13 +13,12 @@ import "../../UiKit/colors.js" as Colors
 Item {
     id: root
 
-    property string temp_value: "#include <iostream>\n int main() { std::cout << \"Hello\";  }"
     property int counter: 0
 
     property var wcodeeditor
 
     function create_tab(filename, filecontent) {
-        var content = counter.toString() + " button"
+        var content = ""
 
         var tab = {
             "tab_index": tabbar.count,
@@ -27,10 +26,11 @@ Item {
         }
         tabbarrepeatermodel.append(tab)
 
-
+        var colorcond = true
+        var editor_color = (colorcond) ? "white" : Qt.rgba(Math.random(), Math.random(), Math.random(), 1).toString()
         var editor = {
             "editor_content": content,
-            "editor_color": Qt.rgba(Math.random(), Math.random(), Math.random(), 1).toString()
+            "editor_color": editor_color
         }
         slrepeatermodel.append(editor)
 
@@ -82,6 +82,7 @@ Item {
         StackLayout {
             id: stacklayout
             width: parent.width
+            height: parent.height - tabbar.height
             currentIndex: tabbar.currentIndex
             anchors.top: tabbar.bottom
             Repeater {
@@ -92,16 +93,10 @@ Item {
                 WCodeEditor {
                     filecontent: editor_content
                     rec_color: editor_color
+                    width: stacklayout.width
+                    height: stacklayout.height
                 }
             }
-        }
-        Button {
-            id: bbb
-            width: 100
-            height: 100
-            anchors.top: stacklayout.top
-            text: "Create"
-            onClicked: create_tab("File.cpp", temp_value)
         }
     }
 }

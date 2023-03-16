@@ -20,9 +20,7 @@ Item {
     Rectangle {
         id: filesRect
 
-        anchors.top: root.top
-        height: parent.height
-        width: 300
+        anchors.fill: parent
 
         color: Colors.MainColor
 
