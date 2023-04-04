@@ -1,7 +1,7 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.4
-
+import QtQml 2.12
 
 Item {
     id: root
@@ -58,7 +58,7 @@ Item {
             anchors.right: parent.right
             anchors.top: parent.top
             anchors.bottom: parent.bottom
-            anchors.margins: 3
+            anchors.margins: 1
             ScrollView {
                 id: textediti
                 anchors.fill: parent
@@ -83,13 +83,12 @@ Item {
                                 "}\n";
                         return str + filecontent;
                     }
-    //                onTextChanged: console.log(textinput.lineCount)
+
                     onTextChanged: {
                         var lines_count = get_lines_count()
                         console.log(lines_count, listmodel.count)
                         if (lines_count < listmodel.count) {
                             listmodel.clear()
-                            console.log("Clear")
                         }
                         for (var i = listmodel.count + 1; i <= lines_count; ++i) {
                             listmodel.append({"line_number": i.toString()})

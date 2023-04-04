@@ -27,9 +27,9 @@ Item
         anchors.centerIn: parent
         text: root.name
         font.bold: true
-        font.family: Fonts.mainFontFamily
+//        font.family: Fonts.mainFontFamily
         font.pixelSize: fontSize
-        color: mouseArea.pressed ? Colors.buttonColor : Colors.buttonTextColor
+        color: mouseArea.pressed ? Colors.ButtonColor : Colors.ButtonTextColor
     }
 
     MouseArea {

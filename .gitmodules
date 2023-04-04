@@ -1,0 +1,3 @@
+[submodule "libs/QCodeEditor"]
+	path = libs/QCodeEditor
+	url = git@github.com:Megaxela/QCodeEditor.git

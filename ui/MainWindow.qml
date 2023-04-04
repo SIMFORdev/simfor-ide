@@ -1,7 +1,6 @@
 ﻿import QtQuick 2.12
 import QtQuick.Window 2.0
 import QtQuick.Controls 2.12
-import QtQuick.Controls 1.4
 import QtQuick.Layouts 1.3
 import QtQuick.Dialogs 1.2
 import QtQml.Models 2.2
@@ -21,7 +20,7 @@ ApplicationWindow {
     width: 1920 * 0.8;
     height: 1080 * 0.8;
 
-    visibility: showMaximized();
+//    visibility: showMaximized();
 
     FontLoader {
         id: robotoRegular;
@@ -34,7 +33,13 @@ ApplicationWindow {
         width: parent.width
         height: 30
 
-        color: "red"
+        color: "grey"
+
+        DefaultButton {
+            name: "Run"
+            anchors.centerIn: parent
+
+        }
     }
 
     FileSystemView {
@@ -42,7 +47,7 @@ ApplicationWindow {
 
         anchors.top: commandPanelRect.bottom
         height: parent.height - commandPanelRect.height
-        width: 50
+        width: 300
     }
 
     WorkspaceView {
@@ -59,11 +64,26 @@ ApplicationWindow {
         onActivated: workspaceView.create_tab("File", "")
     }
 
+    FileDialog {
+        id: fileDialog
+        title: "Please choose a file"
+        folder: shortcuts.home
+        selectFolder: true
+        onAccepted: {
+            fileSystem.setRootIndex(fileSystemModel.setRootFileSystemPath(fileDialog.folder.toString().slice(7)))
+            fileDialog.close()
+        }
+        onRejected: {
+            console.log("Canceled")
+        }
+        Component.onCompleted: visible = false
+    }
+
     menuBar: MenuBar {
             Menu {
                 title: qsTr("&File")
                 Action { text: qsTr("&New..."); onTriggered: console.debug("new pressed"); }
-                Action { text: qsTr("&Open..."); onTriggered: console.debug("open pressed"); }
+                Action { text: qsTr("&Open..."); onTriggered: fileDialog.open(); }
                 Action { text: qsTr("&Save"); onTriggered: console.debug("save pressed"); }
                 Action { text: qsTr("Save &As..."); onTriggered: console.debug("save as pressed"); }
                 MenuSeparator { }
@@ -79,5 +99,5 @@ ApplicationWindow {
                 title: qsTr("&Help")
                 Action { text: qsTr("&About"); onTriggered: console.debug("about pressed"); }
             }
-        } 
+        }
 }

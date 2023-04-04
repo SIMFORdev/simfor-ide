@@ -17,6 +17,12 @@ Item {
 
     implicitWidth: 300
 
+    signal openFile(string path)
+
+    function setRootIndex(ind) {
+        listview.rootIndex = ind
+    }
+
     Rectangle {
         id: filesRect
 
@@ -68,6 +74,8 @@ Item {
                     } else {
                         expand(index)
                     }
+                } else {
+                    openFile(url)
                 }
             }
         }

@@ -15,7 +15,7 @@ MainForm::~MainForm() {
 }
 
 void MainForm::show() {
-    this->model->setRootPath("/home/vadim/programs/qt-creator/SIMFORIDE/");
+    this->model->setRootPath("/home/vadim/programs/cpp/PacketManagerCLient");
     this->model->setResolveSymlinks(true);
     this->qml_app_engine->rootContext()->setContextProperty("fileSystemModel", this->model);
     this->qml_app_engine->rootContext()->setContextProperty("rootPathIndex", this->model->index(this->model->rootPath()));
