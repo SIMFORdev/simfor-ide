@@ -12,6 +12,8 @@ Item {
     property string filecontent
     property string filecontent_displayed
 
+    signal changed()
+
     function get_lines_count() {
         var count = 0
         var is_char = true

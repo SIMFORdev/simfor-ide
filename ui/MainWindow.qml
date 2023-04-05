@@ -36,8 +36,8 @@ ApplicationWindow {
         anchors.top: menuBar.bottom
         width: parent.width
         height: 30
-        onRunClicked: console.log("run")
-        onBuildClicked: console.log("build")
+        onRunClicked: runner.run()
+        onBuildClicked: runner.build()
     }
 
     FileSystemView {
@@ -47,7 +47,6 @@ ApplicationWindow {
         height: parent.height - commandPanelRect.height
         width: 300
         onOpenFile: {
-            runner.setProjectPath(path)
             workspaceView.create_tab(path)
         }
     }
@@ -73,6 +72,7 @@ ApplicationWindow {
         selectFolder: true
         onAccepted: {
             fileSystem.setRootIndex(fileSystemModel.setRootFileSystemPath(fileDialog.folder.toString().slice(7)))
+            runner.projectPath = fileDialog.folder.toString().slice(7)
             fileDialog.close()
         }
         onRejected: {

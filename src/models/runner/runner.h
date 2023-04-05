@@ -21,6 +21,8 @@ signals:
 
 private:
     QString path;
+
+    static QString getTargetName(const QString &path);
 };
 
 #endif // RUNNER_H
