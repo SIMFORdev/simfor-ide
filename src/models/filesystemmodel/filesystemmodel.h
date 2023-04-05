@@ -12,6 +12,7 @@ class FileSystemModel : public QFileSystemModel
 public:
     FileSystemModel(QObject *parent = nullptr);
     Q_INVOKABLE bool isDirectory(const QModelIndex &index) const;
+    Q_INVOKABLE QString fileFullPath(const QModelIndex &index) const;
     Q_INVOKABLE QModelIndex setRootFileSystemPath(const QString &newPath);
 };
 

@@ -9,6 +9,7 @@
         <file>ui/panels/workspacePanel/WorkspaceView.qml</file>
         <file>ui/panels/workspacePanel/WTabButton.qml</file>
         <file>ui/panels/workspacePanel/WCodeEditor.qml</file>
+        <file>ui/panels/commandPanel/CommandPanelView.qml</file>
     </qresource>
     <qresource prefix="/fonts">
         <file>ui/fonts/JetBrainsMonoNL-Thin.ttf</file>

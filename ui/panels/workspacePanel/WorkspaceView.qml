@@ -17,12 +17,16 @@ Item {
 
     property var wcodeeditor
 
-    function create_tab(filename, filecontent) {
+    function create_tab(path) {
         var content = ""
+
+        var fullpath = path.toString().split('/')
+        var filename = fullpath[fullpath.length - 1]
+        var filecontent = ""
 
         var tab = {
             "tab_index": tabbar.count,
-            "tab_text": content
+            "tab_text": filename
         }
         tabbarrepeatermodel.append(tab)
 
@@ -30,7 +34,8 @@ Item {
         var editor_color = (colorcond) ? "white" : Qt.rgba(Math.random(), Math.random(), Math.random(), 1).toString()
         var editor = {
             "editor_content": content,
-            "editor_color": editor_color
+            "editor_color": editor_color,
+            "file_path": path
         }
         slrepeatermodel.append(editor)
 
@@ -91,6 +96,7 @@ Item {
                     id: slrepeatermodel
                 }
                 WCodeEditor {
+                    filepath: file_path
                     filecontent: editor_content
                     rec_color: editor_color
                     width: stacklayout.width

@@ -6,6 +6,7 @@ import QtQuick.Dialogs 1.2
 import QtQml.Models 2.2
 import QtQml 2.12
 import QtQuick.Controls.Styles 1.4
+import Runner 1.0
 
 import "UiKit/Buttons"
 
@@ -13,6 +14,7 @@ import "UiKit/colors.js" as Colors
 
 import "panels/fileSystem"
 import "panels/workspacePanel"
+import "panels/commandPanel"
 
 ApplicationWindow {
     id: root;
@@ -20,26 +22,22 @@ ApplicationWindow {
     width: 1920 * 0.8;
     height: 1080 * 0.8;
 
-//    visibility: showMaximized();
-
     FontLoader {
         id: robotoRegular;
         source: "qrc:/fonts/ui/fonts/JetBrainsMono-Regular.ttf"
     }
 
-    Rectangle {
+    Runner {
+        id: runner
+    }
+
+    CommandPanelView {
         id: commandPanelRect
         anchors.top: menuBar.bottom
         width: parent.width
         height: 30
-
-        color: "grey"
-
-        DefaultButton {
-            name: "Run"
-            anchors.centerIn: parent
-
-        }
+        onRunClicked: console.log("run")
+        onBuildClicked: console.log("build")
     }
 
     FileSystemView {
@@ -48,6 +46,10 @@ ApplicationWindow {
         anchors.top: commandPanelRect.bottom
         height: parent.height - commandPanelRect.height
         width: 300
+        onOpenFile: {
+            runner.setProjectPath(path)
+            workspaceView.create_tab(path)
+        }
     }
 
     WorkspaceView {
@@ -59,10 +61,10 @@ ApplicationWindow {
         width: parent.width - fileSystem.width
     }
 
-    Shortcut {
-        sequence: "Ctrl+N"
-        onActivated: workspaceView.create_tab("File", "")
-    }
+//    Shortcut {
+//        sequence: "Ctrl+N"
+//        onActivated: workspaceView.create_tab("File", "")
+//    }
 
     FileDialog {
         id: fileDialog

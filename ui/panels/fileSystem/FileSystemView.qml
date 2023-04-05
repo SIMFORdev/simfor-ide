@@ -49,7 +49,7 @@ Item {
             }
 
             model: fileSystemModel
-            rootIndex: rootPathIndex
+//            rootIndex: rootPathIndex
 
 //            itemDelegate:  FileSystemPanel {
 //                id: fileSystemPanel
@@ -66,8 +66,6 @@ Item {
             }
 
             onActivated : function(index) {
-                var url = fileSystemModel.rootPath + "/"
-                        + fileSystemModel.data(index, FileSystemModel.UrlStringRole)
                 if (fileSystemModel.isDirectory(index)) {
                     if (isExpanded(index)) {
                         collapse(index)
@@ -75,7 +73,8 @@ Item {
                         expand(index)
                     }
                 } else {
-                    openFile(url)
+                    console.log(fileSystemModel.fileFullPath(index))
+                    openFile(fileSystemModel.fileFullPath(index))
                 }
             }
         }

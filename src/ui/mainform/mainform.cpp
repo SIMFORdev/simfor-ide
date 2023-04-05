@@ -1,13 +1,19 @@
 #include "mainform.h"
 #include <QDebug>
 
+#include "filehandler.h"
+#include "runner.h"
+
 MainForm::MainForm(QObject* parent) : QObject(parent) {
     this->qml_app_engine = new QQmlApplicationEngine;
-    this->model = new FileSystemModel(this->qml_app_engine);
+    this->filesystemmodel = new FileSystemModel(this->qml_app_engine);
 //    this->model->setRootPath(QDir::currentPath());
 
     qmlRegisterUncreatableType<FileSystemModel>("FileSystemModel", 1, 0,
-                                                 "FileSystemModel", "Cannot create a FileSystemModel instance.");
+                                                 "FileSystemModel",
+                                                "Cannot create a FileSystemModel instance.");
+    qmlRegisterType<FileHandler>("FileHandler", 1, 0, "FileHandler");
+    qmlRegisterType<Runner>("Runner", 1, 0, "Runner");
 }
 
 MainForm::~MainForm() {
@@ -15,10 +21,13 @@ MainForm::~MainForm() {
 }
 
 void MainForm::show() {
-    this->model->setRootPath("/home/vadim/programs/cpp/PacketManagerCLient");
-    this->model->setResolveSymlinks(true);
-    this->qml_app_engine->rootContext()->setContextProperty("fileSystemModel", this->model);
-    this->qml_app_engine->rootContext()->setContextProperty("rootPathIndex", this->model->index(this->model->rootPath()));
+//    this->filesystemmodel->setRootPath("");
+    this->filesystemmodel->setResolveSymlinks(true);
+    this->qml_app_engine->rootContext()->
+            setContextProperty("fileSystemModel", this->filesystemmodel);
+//    this->qml_app_engine->rootContext()->
+//            setContextProperty("rootPathIndex",
+//                               this->filesystemmodel->index(this->filesystemmodel->rootPath()));
     this->qml_app_engine->load(QUrl(QStringLiteral("qrc:/qml/ui/MainWindow.qml")));
     if (this->qml_app_engine->rootObjects().isEmpty()) {
         emit this->qml_app_engine->exit(-1);

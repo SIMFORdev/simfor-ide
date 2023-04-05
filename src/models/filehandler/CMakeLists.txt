@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(mainform)
+project(filehandler)
 
 find_package(Qt5 COMPONENTS REQUIRED
                                     Widgets
@@ -9,15 +9,11 @@ find_package(Qt5 COMPONENTS REQUIRED
                                     Core
 )
 
-add_library(${PROJECT_NAME} STATIC mainform.cpp mainform.h)
+add_library(${PROJECT_NAME} STATIC filehandler.cpp filehandler.h)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Core)
 target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Widgets)
 target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Qml)
 target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Quick)
-
-target_link_libraries(${PROJECT_NAME} PUBLIC filesystemmodel)
-target_link_libraries(${PROJECT_NAME} PUBLIC filehandler)
-target_link_libraries(${PROJECT_NAME} PUBLIC runner)
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

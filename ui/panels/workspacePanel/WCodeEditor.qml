@@ -2,10 +2,12 @@ import QtQuick 2.0
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.4
 import QtQml 2.12
+import FileHandler 1.0
 
 Item {
     id: root
 
+    property string filepath
     property color rec_color
     property string filecontent
     property string filecontent_displayed
@@ -22,6 +24,11 @@ Item {
             }
         }
         return count + (is_char || textinput.text[textinput.text.length - 1] === '\n')
+    }
+
+    FileHandler {
+        id: filehander
+        filePath: filepath
     }
 
     Rectangle {
@@ -66,27 +73,14 @@ Item {
                     id: textinput
 
                     anchors.fill: parent
-    //                font: "/home/vadim/programs/qt-creator/SIMFORIDE/ui/fonts/JetBrainsMono-Bold.ttf"
-
                     textFormat: TextEdit.PlainText
                     mouseSelectionMode: TextEdit.SelectCharacters
                     selectByMouse: true
                     persistentSelection: true
-                    text: {
-                        var str = "#include <iostream>\n" +
-                                "\n" +
-                                "using namespace std;\n" +
-                                "\n" +
-                                "int main() {\n" +
-                                "    cout << \"Hello world\\n\";\n" +
-                                "    return 0;\n" +
-                                "}\n";
-                        return str + filecontent;
-                    }
+                    text: filehander.textCurrent
 
                     onTextChanged: {
                         var lines_count = get_lines_count()
-                        console.log(lines_count, listmodel.count)
                         if (lines_count < listmodel.count) {
                             listmodel.clear()
                         }
