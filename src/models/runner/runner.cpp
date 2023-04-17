@@ -11,7 +11,8 @@ void Runner::run() {
     if (!path.size())
         return;
     qDebug() << "run";
-    build();
+//    build();
+    qDebug() << getTargetName(path);
     QString command = "sh /home/vadim/programs/qt-creator/SIMFORIDE/src/scripts/run.sh " +
             path + " " + getTargetName(path);
     system(command.toLocal8Bit().data());
